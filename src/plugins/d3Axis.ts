@@ -10,7 +10,7 @@ export const d3Axis: TimeChartPlugin = {
 
         const xAxis = axisBottom(chart.model.xScale);
         const yAxis = axisLeft(chart.model.yScale);
-
+        
         function update() {
             const xs = chart.model.xScale;
             const xts = chart.options.xScaleType()
@@ -20,6 +20,7 @@ export const d3Axis: TimeChartPlugin = {
             xg.call(xAxis);
 
             yAxis.scale(chart.model.yScale);
+            yAxis.ticks(chart.options.yTicks||10)
             yg.call(yAxis);
         }
 

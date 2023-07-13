@@ -99,15 +99,18 @@ export class RenderModel {
             const minMaxY = series.flatMap(s => {
                 return [
                     calcMinMaxY(s.data, 0, s.data.pushed_front),
-                    calcMinMaxY(s.data, s.data.length - s.data.pushed_back, s.data.length),
+                    calcMinMaxY(s.data, 0, s.data.length),
                 ];
             })
             if (this.yRange) {
-                minMaxY.push(this.yRange);
+           //     minMaxY.push(this.yRange);
             }
-            this.yRange = unionMinMax(...minMaxY);
+            //console.log(minMaxY)
+            this.yRange =  unionMinMax(...minMaxY);
+
             if (o.yRange === 'auto') {
-                this.yScale.domain([this.yRange.min, this.yRange.max]).nice();
+                const gap =  (this.yRange.max- this.yRange.min)*0.1
+                this.yScale.domain([this.yRange.min-gap, this.yRange.max+gap]).nice();
             } else if (o.yRange) {
                 this.yScale.domain([o.yRange.min, o.yRange.max])
             }
