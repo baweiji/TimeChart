@@ -39,24 +39,3 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          registry-url: https://npm.pkg.github.com/
-          cache: 'npm'
-      - run: |
-          npm ci
-          node <<EOF
-            const pkg = require('./package.json');
-            pkg.name = '@huww98/' + pkg.name;
-            const fs = require('fs');
-            fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 4));
-          EOF
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
