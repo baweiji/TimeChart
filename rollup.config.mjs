@@ -36,7 +36,7 @@ const config = {
         },
         { file: 'dist/timechart.module.js', format: 'es', sourcemap: true },
     ],
-    external: (id) => id.startsWith('d3-'),
+    //external: (id) => id.startsWith('d3-'),
     watch: {
         include: 'src/**',
     },
@@ -70,7 +70,7 @@ const configPluginsExtra = {
             sourcemap: true
         },
     ],
-    external: (id) => id.startsWith('d3-'),
+    //external: (id) => id.startsWith('d3-'),
     watch: {
         include: 'src/plugins_extra/**',
     },
