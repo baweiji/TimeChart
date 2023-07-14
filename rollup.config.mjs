@@ -3,7 +3,12 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import terser from "@rollup/plugin-terser";
 
-import pkg from './package.json' assert {type: 'json'};
+import { readFile } from 'fs/promises';
+const pkg = JSON.parse(
+  await readFile(
+    new URL('./package.json', import.meta.url)
+  )
+);
 
 const ts = typescript({ compilerOptions: {outDir: 'dist', declaration: false}})
 
